@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/controller/home_controller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,7 +9,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
         child: Column(
           children: [
@@ -22,7 +23,10 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(FontAwesomeIcons.locationDot,size: 29,),
+                    Consumer<HomeController>(builder: (BuildContext context, value, Widget? child) { 
+                      return  InkWell ( onTap: value.getCurrentLoaction ,child: Icon(FontAwesomeIcons.locationDot,size: 29,))  ;
+                     },
+                  ),
                     Icon(FontAwesomeIcons.magnifyingGlassPlus , size: 29,),
                     Icon(FontAwesomeIcons.bars , size: 29,)
                   ],

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/controller/home_controller.dart';
 import 'package:weather_app/viwes/home_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -14,9 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
-  
-    
-      home:HomePage()
+      home:ChangeNotifierProvider( create: (context) => HomeController(),child: HomePage())
   
     );
   }

@@ -14,7 +14,9 @@
   <img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS-green?logo=android&logo=apple"/>  
   <img src="https://img.shields.io/github/license/your-username/meteovue"/>  
 </p>  
-
+📸 Screenshots
+<p align="center"> <img src="assets/screennshot/HomeEng.png" width="220" /> <img src="assets/screennshot/HomeAr.png" width="220" /> <img src="assets/screennshot/Search.png" width="220" /> </p>
+Home Screen	, Screen	Search City
 ---
 
 ## ✨ Features  
@@ -52,9 +54,7 @@ Add it to your project:
 // lib/services/api.dart
 const String apiKey = "YOUR_API_KEY_HERE";
 
-📸 Screenshots
-<p align="center"> <img src="assets/screenshots/home.png" width="220" /> <img src="assets/screenshots/forecast.png" width="220" /> <img src="assets/screenshots/search.png" width="220" /> </p>
-Home Screen	Forecast Screen	Search City
+
 
 	
 	

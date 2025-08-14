@@ -1,16 +1,67 @@
-# weather_app
+🌤️ Meteovue – Weather App
+<p align="center"> <img src="assets/icon.png" width="120" alt="Meteovue Logo"/> </p> <p align="center"> <b>A modern weather app built with Flutter 🌍☁️</b><br/> Get accurate forecasts, live conditions, and a clean UI powered by OpenWeatherMap API. </p>
+✨ Features
 
-A new Flutter project.
+📍 Location-based Weather – Auto-detects your location
 
-## Getting Started
+🔍 City Search – Search weather in any city worldwide
 
-This project is a starting point for a Flutter application.
+🌡️ Current Conditions – Temperature, humidity, wind, visibility
 
-A few resources to get you started if this is your first Flutter project:
+🎨 Modern UI – Clean, responsive, and supports dark mode
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🌐 Multi-language Support – Easily switch languages
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+📊 Weather Icons & Animations – Dynamic visuals for each condition
+
+🚀 Getting Started
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/meteovue.git
+cd meteovue
+
+2️⃣ Install Dependencies
+flutter pub get
+
+3️⃣ Run the App
+flutter run
+
+⚙️ Configuration
+
+Create a free account at OpenWeatherMap
+
+Get your API Key
+
+Add it inside your Flutter project:
+
+lib/services/api.dart
+
+const String apiKey = "YOUR_API_KEY_HERE";
+
+📸 Screenshots
+Home Screen	Forecast Screen	Search City
+
+	
+	
+📦 Dependencies
+
+provider – State management
+
+http – API requests
+
+flutter_svg – SVG icons
+
+intl – Date & time formatting
+
+🤝 Contribution
+
+Contributions are welcome!
+
+Fork the project
+
+Create your feature branch (git checkout -b feature/new-feature)
+
+Commit your changes (git commit -m 'Add new feature')
+
+Push to the branch (git push origin feature/new-feature)
+
+Open a Pull Request

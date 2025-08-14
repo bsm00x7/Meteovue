@@ -1,0 +1,22 @@
+{
+  "weather": "Météo",
+  "today": "Aujourd'hui",
+  "gettingWeatherData": "Récupération des données météo...",
+  "oops": "Oups!",
+  "tryAgain": "Réessayer",
+  "clearSky": "CIEL DÉGAGÉ",
+  "feelsLike": "Ressenti {temperature}°C",
+  "maxTemp": "Temp. Max",
+  "minTemp": "Temp. Min",
+  "humidity": "Humidité",
+  "windSpeed": "Vitesse du vent",
+  "sunrise": "Lever du soleil",
+  "sunset": "Coucher du soleil",
+  "searchCity": "Rechercher une ville",
+  "enterCityName": "Entrez le nom de la ville...",
+  "cancel": "Annuler",
+  "search": "Rechercher",
+  "arabic": "عربية",
+  "french": "Français",
+  "english": "English"
+}

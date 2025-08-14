@@ -1,0 +1,22 @@
+{
+  "weather": "الطقس",
+  "today": "اليوم",
+  "gettingWeatherData": "جاري الحصول على بيانات الطقس...",
+  "oops": "عذراً!",
+  "tryAgain": "حاول مرة أخرى",
+  "clearSky": "سماء صافية",
+  "feelsLike": "يبدو كـ {temperature}°م",
+  "maxTemp": "أقصى حرارة",
+  "minTemp": "أدنى حرارة",
+  "humidity": "الرطوبة",
+  "windSpeed": "سرعة الرياح",
+  "sunrise": "شروق الشمس",
+  "sunset": "غروب الشمس",
+  "searchCity": "البحث عن مدينة",
+  "enterCityName": "أدخل اسم المدينة...",
+  "cancel": "إلغاء",
+  "search": "بحث",
+  "arabic": "عربية",
+  "french": "Français",
+  "english": "English"
+}

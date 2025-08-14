@@ -1,0 +1,29 @@
+{
+  "weather": "Weather",
+  "today": "Today",
+  "gettingWeatherData": "Getting weather data...",
+  "oops": "Oops!",
+  "tryAgain": "Try Again",
+  "clearSky": "CLEAR SKY",
+  "feelsLike": "Feels like {temperature} °C",
+  "@feelsLike": {
+    "placeholders": {
+      "temperature": {
+        "type": "int"
+      }
+    }
+  },
+  "maxTemp": "Max Temp",
+  "minTemp": "Min Temp",
+  "humidity": "Humidity",
+  "windSpeed": "Wind Speed",
+  "sunrise": "Sunrise",
+  "sunset": "Sunset",
+  "searchCity": "Search City",
+  "enterCityName": "Enter city name...",
+  "cancel": "Cancel",
+  "search": "Search",
+  "arabic": "عربية",
+  "french": "Français",
+  "english": "English"
+}

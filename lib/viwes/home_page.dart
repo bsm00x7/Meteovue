@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/controller/home_controller.dart';
+
+import '../controller/lang_controller.dart';
+import '../generated/l10n.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,17 +14,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.read<HomeController>();
+    final lang = S.of(context);
+    final langController = context.read<LocaleController>();
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF74b9ff),
-              Color(0xFF0984e3),
-              Color(0xFF6c5ce7),
-            ],
+            colors: [Color(0xFF74b9ff), Color(0xFF0984e3), Color(0xFF6c5ce7)],
           ),
         ),
         child: SafeArea(
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 // Header with location
-                _buildHeader(),
+                _buildHeader(context,  langController),
 
                 const SizedBox(height: 30),
 
@@ -48,7 +50,7 @@ class HomePage extends StatelessWidget {
                               ),
                               SizedBox(height: 20),
                               Text(
-                                'Getting weather data...',
+                                lang.gettingWeatherData,
                                 style: GoogleFonts.poppins(
                                   color: Colors.white70,
                                   fontSize: 16,
@@ -73,7 +75,7 @@ class HomePage extends StatelessWidget {
                               ),
                               SizedBox(height: 20),
                               Text(
-                                'Oops!',
+                                lang.oops,
                                 style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 24,
@@ -96,15 +98,20 @@ class HomePage extends StatelessWidget {
                               ElevatedButton(
                                 onPressed: () => provider.refreshWeatherData(),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.white.withOpacity(0.2),
+                                  backgroundColor: Colors.white.withValues(
+                                    alpha: 0.2,
+                                  ),
                                   foregroundColor: Colors.white,
-                                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 30,
+                                    vertical: 15,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                 ),
                                 child: Text(
-                                  'Try Again',
+                                  lang.tryAgain,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -120,11 +127,11 @@ class HomePage extends StatelessWidget {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            _buildMainWeatherCard(provider),
+                            _buildMainWeatherCard(provider , context),
                             const SizedBox(height: 20),
-                            _buildWeatherDetailsGrid(provider),
+                            _buildWeatherDetailsGrid(provider,context),
                             const SizedBox(height: 20),
-                            _buildSunTimesCard(provider),
+                            _buildSunTimesCard(provider, context),
                           ],
                         ),
                       ),
@@ -144,7 +151,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context ,LocaleController controller) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -152,7 +159,7 @@ class HomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Weather',
+              S.of(context).weather,
               style: GoogleFonts.poppins(
                 color: Colors.white,
                 fontSize: 32,
@@ -160,32 +167,90 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Text(
-              'Today',
-              style: GoogleFonts.poppins(
-                color: Colors.white70,
-                fontSize: 16,
-              ),
+              S.of(context).today,
+              style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16),
             ),
           ],
         ),
         Container(
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: Colors.white.withOpacity(0.3)),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
           ),
-          child: Icon(
-            FontAwesomeIcons.bell,
-            color: Colors.white,
-            size: 20,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton(
+
+              borderRadius: BorderRadius.circular(19),
+              value: controller.currentLang,
+              dropdownColor: const Color(0xFF74b9ff),
+              icon: const Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 20),
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+              items: [
+                DropdownMenuItem<String>(
+                  value: 'ar',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: SvgPicture.asset("assets/svg/tn.svg"),
+                      ),
+                      const SizedBox(width: 8),
+                      Text("Ar"),
+                    ],
+                  ),
+                ),
+                DropdownMenuItem<String>(
+                  value: 'en',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: SvgPicture.asset("assets/svg/united-kingdom-flag-icon.svg"),
+                      ),
+                      const SizedBox(width: 8),
+                      Text("En"),
+                    ],
+                  ),
+                ),
+                DropdownMenuItem<String>(
+                  value: 'fr',
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: SvgPicture.asset("assets/svg/flag-for-flag-france-svgrepo-com.svg"),
+                      ),
+                      const SizedBox(width: 8),
+                      Text("Fr"),
+                    ],
+                  ),
+                ),
+              ],
+              onChanged: (value) async{
+                 controller.changeLang(value?? "ar");
+                controller.refrechScreen();
+
+              },
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildMainWeatherCard(provider) {
+  Widget _buildMainWeatherCard(provider , context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(30),
@@ -194,15 +259,15 @@ class HomePage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.3),
-            Colors.white.withOpacity(0.1),
+            Colors.white.withValues(alpha: 0.3),
+            Colors.white.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: Offset(0, 10),
           ),
@@ -214,11 +279,7 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                FontAwesomeIcons.locationDot,
-                color: Colors.white,
-                size: 16,
-              ),
+              Icon(FontAwesomeIcons.locationDot, color: Colors.white, size: 16),
               SizedBox(width: 8),
               Text(
                 '${provider.currentWeather.name ?? 'Mahdia'}, ${provider.currentWeather.sys?.country ?? 'TN'}',
@@ -238,12 +299,13 @@ class HomePage extends StatelessWidget {
             height: 120,
             width: 120,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(60),
             ),
             child: Center(
               child: Image.network(
-                'http://openweathermap.org/img/wn/${provider.currentWeather.weather?[0]?.icon ?? '01d'}@2x.png',
+                // make Image Url
+                '',
                 height: 80,
                 width: 80,
                 errorBuilder: (context, error, stackTrace) {
@@ -261,8 +323,9 @@ class HomePage extends StatelessWidget {
 
           // Weather description
           Text(
-            provider.currentWeather.weather?[0]?.description?.toUpperCase() ?? 'CLEAR SKY',
-            style: GoogleFonts.poppins(
+            provider.currentWeather.weather?[0]?.description?.toUpperCase() ??
+                S.of(context).clearSky,
+              style: GoogleFonts.poppins(
               color: Colors.white70,
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -298,18 +361,16 @@ class HomePage extends StatelessWidget {
 
           // Feels like temperature
           Text(
-            'Feels like ${provider.currentWeather.main?.feelsLike?.round() ?? 25}°C',
-            style: GoogleFonts.poppins(
-              color: Colors.white70,
-              fontSize: 16,
-            ),
+            '${S.of(context).feelsLike(provider.currentWeather.main?.feelsLike?.round() ?? 26) } ',
+            style: GoogleFonts.poppins(color: Colors.white70, fontSize: 16),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildWeatherDetailsGrid(provider) {
+  Widget _buildWeatherDetailsGrid(provider, BuildContext context) {
+    final lang = S.of(context);
     return GridView.count(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
@@ -320,25 +381,25 @@ class HomePage extends StatelessWidget {
       children: [
         _buildDetailCard(
           icon: FontAwesomeIcons.temperatureHigh,
-          title: 'Max Temp',
+          title: lang.maxTemp,
           value: '${provider.currentWeather.main?.tempMax?.round() ?? 25}°C',
           color: Color(0xFFff7675),
         ),
         _buildDetailCard(
           icon: FontAwesomeIcons.temperatureLow,
-          title: 'Min Temp',
+          title: lang.minTemp,
           value: '${provider.currentWeather.main?.tempMin?.round() ?? 25}°C',
           color: Color(0xFF74b9ff),
         ),
         _buildDetailCard(
           icon: FontAwesomeIcons.droplet,
-          title: 'Humidity',
+          title: lang.humidity,
           value: '${provider.currentWeather.main?.humidity ?? 76}%',
           color: Color(0xFF00b894),
         ),
         _buildDetailCard(
           icon: FontAwesomeIcons.wind,
-          title: 'Wind Speed',
+          title: lang.windSpeed,
           value: '${provider.currentWeather.wind?.speed ?? 1.13} m/s',
           color: Color(0xFF6c5ce7),
         ),
@@ -359,12 +420,12 @@ class HomePage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.25),
-            Colors.white.withOpacity(0.1),
+            Colors.white.withValues(alpha: 0.25),
+            Colors.white.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -372,14 +433,10 @@ class HomePage extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 24,
-            ),
+            child: Icon(icon, color: color, size: 24),
           ),
           SizedBox(height: 12),
           Text(
@@ -404,7 +461,8 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildSunTimesCard(provider) {
+  Widget _buildSunTimesCard(provider, BuildContext context) {
+    final lang = S.of(context);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(25),
@@ -413,30 +471,30 @@ class HomePage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withOpacity(0.25),
-            Colors.white.withOpacity(0.1),
+            Colors.white.withValues(alpha: 0.25),
+            Colors.white.withValues(alpha: 0.1),
           ],
         ),
         borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildSunTimeItem(
             icon: FontAwesomeIcons.solidSun,
-            title: 'Sunrise',
+            title: lang.sunrise,
             time: _formatTime(provider.currentWeather.sys?.sunrise) ?? '06:15',
             color: Color(0xFFfdcb6e),
           ),
           Container(
             height: 50,
             width: 1,
-            color: Colors.white.withOpacity(0.3),
+            color: Colors.white.withValues(alpha: 0.3),
           ),
           _buildSunTimeItem(
             icon: FontAwesomeIcons.moon,
-            title: 'Sunset',
+            title: lang.sunset,
             time: _formatTime(provider.currentWeather.sys?.sunset) ?? '19:45',
             color: Color(0xFFe17055),
           ),
@@ -456,14 +514,10 @@ class HomePage extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
+            color: color.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(50),
           ),
-          child: Icon(
-            icon,
-            color: color,
-            size: 20,
-          ),
+          child: Icon(icon, color: color, size: 20),
         ),
         SizedBox(height: 8),
         Text(
@@ -488,6 +542,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildBottomNavigation(controller, context) {
+
     return Container(
       height: 70,
       decoration: BoxDecoration(
@@ -523,19 +578,6 @@ class HomePage extends StatelessWidget {
             icon: FontAwesomeIcons.magnifyingGlass,
             onTap: () => _showSearchDialog(context, controller),
           ),
-          _buildNavItem(
-            icon: FontAwesomeIcons.chartLine,
-            onTap: () {
-              // TODO: Navigate to forecast/charts page
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Forecast view coming soon!'),
-                  backgroundColor: Colors.blue,
-                  duration: Duration(seconds: 2),
-                ),
-              );
-            },
-          ),
         ],
       ),
     );
@@ -551,32 +593,30 @@ class HomePage extends StatelessWidget {
       borderRadius: BorderRadius.circular(25),
       child: Container(
         padding: EdgeInsets.all(15),
-        decoration: isActive ? BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
-          borderRadius: BorderRadius.circular(25),
-        ) : null,
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 24,
-        ),
+        decoration: isActive
+            ? BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(25),
+              )
+            : null,
+        child: Icon(icon, color: Colors.white, size: 24),
       ),
     );
   }
 
   void _showSearchDialog(BuildContext context, HomeController controller) {
     TextEditingController searchController = TextEditingController();
-
     showDialog(
       context: context,
+
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Color(0xFF74b9ff).withOpacity(0.95),
+          backgroundColor: Color(0xFF74b9ff).withValues(alpha: 0.95),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           title: Text(
-            'Search City',
+            S.of(context).searchCity,
             style: GoogleFonts.poppins(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -586,7 +626,7 @@ class HomePage extends StatelessWidget {
             controller: searchController,
             style: GoogleFonts.poppins(color: Colors.white),
             decoration: InputDecoration(
-              hintText: 'Enter city name...',
+              hintText: S.of(context).enterCityName,
               hintStyle: GoogleFonts.poppins(color: Colors.white70),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white70),
@@ -607,7 +647,7 @@ class HomePage extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
-                'Cancel',
+               S.of(context).cancel,
                 style: GoogleFonts.poppins(color: Colors.white70),
               ),
             ),
@@ -626,10 +666,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Search',
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                ),
+                S.of(context).search,
+                style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
               ),
             ),
           ],

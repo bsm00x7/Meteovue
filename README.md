@@ -1,49 +1,28 @@
-🌤️ Meteovue – Weather App A modern weather app built with Flutter 🌍☁️ Get accurate forecasts, live conditions, and a clean UI powered by OpenWeatherMap API. --- ## ✨ Features ✅ 📍 **Location-based Weather** – Auto-detects your location ✅ 🔍 **City Search** – Find weather for any city worldwide ✅ 🌡️ **Current Conditions** – Temperature, humidity, wind, visibility ✅ 📆 **Forecast** – Hourly & 7-day weather outlook ✅ 🎨 **Modern UI** – Clean, responsive, supports **dark mode** ✅ 🌐 **Multi-language Support** – Switch between languages easily ✅ 📊 **Dynamic Icons & Animations** – Beautiful weather visuals --- ## 🚀 Getting Started ### 1️⃣ Clone the Repository
-bash
+# 🌤️ Meteovue – Weather App  
+
+<p align="center">
+  <img src="assets/logo/logo.png" width="120" alt="Meteovue Logo"/>
+</p>
+
+A modern weather app built with Flutter 🌍☁️  
+Get accurate forecasts, live conditions, and a clean UI powered by OpenWeatherMap API.  
+
+---
+
+## ✨ Features  
+✅ 📍 **Location-based Weather** – Auto-detects your location  
+✅ 🔍 **City Search** – Find weather for any city worldwide  
+✅ 🌡️ **Current Conditions** – Temperature, humidity, wind, visibility  
+✅ 📆 **Forecast** – Hourly & 7-day weather outlook  
+✅ 🎨 **Modern UI** – Clean, responsive, supports **dark mode**  
+✅ 🌐 **Multi-language Support** – Switch between languages easily  
+✅ 📊 **Dynamic Icons & Animations** – Beautiful weather visuals  
+
+---
+
+## 🚀 Getting Started  
+
+### 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/your-username/meteovue.git
 cd meteovue
-2️⃣ Install Dependencies
-flutter pub get
-3️⃣ Run the App
-flutter run
-⚙️ Configuration
-Create a free account at OpenWeatherMap
-Get your API Key
-Add it to your project:
-// lib/services/api.dart
-const String apiKey = "YOUR_API_KEY_HERE";
-📸 Screenshots
-
-
-    
-
-
-Home Screen	Forecast Screen	Search City
-	
-	
-📦 Dependencies
-provider – State management
-http – API requests
-flutter_svg – SVG icons
-intl – Date & time formatting
-Create a Branch
-git checkout -b feature/your-feature
-Make Your Changes
-Add new features or fix bugs
-Keep code clean and well-documented
-Commit Your Changes
-git commit -m "Add: description of feature"
-Push to Your Branch
-git push origin feature/your-feature
-Create a Pull Request
-Open a PR against the main branch
-Describe your changes clearly
-🛠️ Code Style
-Use Dart & Flutter style guide
-Run flutter analyze before pushing
-Keep commits small and descriptive
-💡 Suggestions
-If you have ideas but don’t want to code them yourself:
-Open an Issue describing your idea
-Add labels like enhancement, bug, or help wanted
-Thank you for making Meteovue better! 🌤️
